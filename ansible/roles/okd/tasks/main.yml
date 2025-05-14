@@ -1,0 +1,19 @@
+- name: Instalar dependencias de OKD
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - wget
+    - curl
+    - tar
+    - chrony
+    - podman
+
+- name: Descargar e instalar OKD client (oc)
+  shell: |
+    wget https://github.com/openshift/okd/releases/download/4.14.0-0.okd-2024-01-13-034414/openshift-client-linux.tar.gz -O /tmp/oc.tar.gz
+    tar -xvzf /tmp/oc.tar.gz -C /usr/local/bin
+    chmod +x /usr/local/bin/oc
+  args:
+    creates: /usr/local/bin/oc

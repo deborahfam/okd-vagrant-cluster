@@ -1,0 +1,5 @@
+- name: Instalar OKD en Ubuntu
+  hosts: okd
+  become: true
+  roles:
+    - okd
